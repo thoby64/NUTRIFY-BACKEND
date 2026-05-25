@@ -1,0 +1,1 @@
+venv/bin/python import_data.py 2>&1 | tail -100
