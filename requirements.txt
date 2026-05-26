@@ -12,10 +12,8 @@ xlrd==2.0.1
 python-dotenv==1.0.0
 cors==1.0.1
 fastapi-cors==0.0.6
-passlib
-argon2-cffi
-bcrypt
+passlib[bcrypt]==1.7.4
+argon2-cffi==21.3.0
 PyJWT
-python-jose
-cryptography
-email-validator
+python-jose[cryptography]==3.3.0
+email-validator==1.2.1
