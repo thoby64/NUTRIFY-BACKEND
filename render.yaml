@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: nutrition-backend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: 1
+      - key: APP_ENV
+        value: production
+      - key: DEBUG
+        value: false
+      - key: LOG_LEVEL
+        value: INFO
+      - key: API_HOST
+        value: 0.0.0.0
+      - key: SKIP_STARTUP_CHECKS
+        value: true
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: nutrition-analytic-app
+          property: url
+      - key: CORS_ORIGINS
+        scope: runtime
+        value: '[]'  # Will be set via environment variable on Render
+      - key: DATABASE_URL
+        scope: runtime
+      - key: SECRET_KEY
+        scope: runtime
+    autoDeploy: true
