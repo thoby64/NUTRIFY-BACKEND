@@ -9,6 +9,8 @@ services:
     envVars:
       - key: PYTHONUNBUFFERED
         value: 1
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: APP_ENV
         value: production
       - key: DEBUG
