@@ -5,7 +5,7 @@ services:
     runtime: python-3.11
     plan: free
     buildCommand: env CARGO_HOME=/tmp/.cargo RUSTUP_HOME=/tmp/.rustup pip install --upgrade pip setuptools wheel && env CARGO_HOME=/tmp/.cargo RUSTUP_HOME=/tmp/.rustup pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: python scripts/render_start.py
     envVars:
       - key: PYTHONUNBUFFERED
         value: 1
@@ -18,15 +18,11 @@ services:
       - key: API_HOST
         value: 0.0.0.0
       - key: SKIP_STARTUP_CHECKS
-        value: true
+        value: false
       - key: FRONTEND_URL
-        fromService:
-          type: web
-          name: nutrition-analytic-app
-          property: url
+        value: https://nutrition-analytic-app.onrender.com
       - key: CORS_ORIGINS
-        scope: runtime
-        value: '[]'  # Will be set via environment variable on Render
+        value: '["https://nutrition-analytic-app.onrender.com"]'
       - key: DATABASE_URL
         scope: runtime
       - key: SECRET_KEY
